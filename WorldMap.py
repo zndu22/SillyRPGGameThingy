@@ -17,13 +17,19 @@ class WorldMap():
         return self.img.size
 
     def getPixel(self, x, y):
+        if not self.isInBounds(x, y):
+            return (0, 0, 0)
         return self.pixels[x, y]
 
     def setPixel(self, x, y, r, g, b):
         self.pixels.set_pixel(x, y, (r, g, b))
 
+    def isInBounds(self, x, y):
+        return 0 <= x < self.columns and 0 <= y < self.rows
+
     def isOutOfBounds(self, pos):
-        return pos[0] < 0 or pos[0] > self.columns or pos[1] < 0 or pos[1] > self.rows
+        x, y = pos
+        return not self.isInBounds(x, y)
     
     def generateTilemap(self):
         for x in range(self.columns):

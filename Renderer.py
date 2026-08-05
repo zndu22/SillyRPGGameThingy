@@ -3,6 +3,7 @@ from constants import *
 
 from World import World
 from Camera import Camera
+from Character import Character
 
 class Renderer():
 
@@ -18,13 +19,14 @@ class Renderer():
 		self.blit(world.worldMap.tilemap, camera.getPosition())
 
 		for i in world.entities:
-			self.blit(i.sprite, 
-							tuple(
-								(v * (tileWidth, tileHeight)[i]) + camera.getPosition()[i]
-								for i, v in enumerate(i.getPosition()))) #sorry future me
-
+			self.blit(i.sprite, self.toScreenSpace(world, camera, i.getPosition())) # sorry future me
+			if isinstance(i, Character):
+				pygame.draw.line(self.screen, (255, 0, 0), self.toScreenSpace(world, camera, i.getPosition()), self.toScreenSpace(world, camera, i.targetTile), 8)
 
 		pygame.display.flip()
 	
 	def blit(self, surface, position):
 		self.screen.blit(surface, position)
+
+	def toScreenSpace(self, world: World, camera:Camera, pos):
+		return tuple(v * (tileWidth, tileHeight)[i] + camera.getPosition()[i] for i, v in enumerate(pos))

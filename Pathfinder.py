@@ -73,7 +73,7 @@ class Pathfinder:
 		for dx, dy in offsets:
 			nx = x + dx
 			ny = y + dy
-			if self.world.worldMap.getPixel(nx, ny) in self.walkableTiles:
+			if not self.world.worldMap.getPixel(nx, ny) in self.walkableTiles:
 				continue
 			#
 			# Prevent corner cutting

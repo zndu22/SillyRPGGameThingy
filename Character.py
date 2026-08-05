@@ -15,6 +15,7 @@ class Character(Entity):
 		self.validTiles = [grassColor, mountianColor]
 
 		self.pathfinder = Pathfinder(self.world, self.validTiles)
+		self.targetTile = position
 		
 	def Damage(self, health):
 		self.HP -= health
@@ -28,6 +29,8 @@ class Character(Entity):
 			self.setPosition(targetPos)
 
 	def pathfindTo(self, target):
+		self.targetTile = target
+
 		if not self.pathfinder.path:
 			self.pathfinder.findPath(
 				self.getPosition(),
@@ -39,7 +42,9 @@ class Character(Entity):
 	
 	def Update(self, world):
 		# self.move((random.randint(-1, 1), random.randint(-1, 1)))
-		if self.pathfinder.hasPath(): return
+		if self.pathfinder.hasPath(): 
+			self.Move(self.pathfinder.nextMove())
+			return
 		targetPos = addTuples(self.getPosition(), (random.randint(-10, 10), random.randint(-10, 10)))
 		if self.world.worldMap.isOutOfBounds(targetPos): return
 		if self.world.worldMap.getPixel(targetPos[0], targetPos[1]) in self.validTiles:
