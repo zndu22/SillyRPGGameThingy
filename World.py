@@ -22,7 +22,7 @@ class World():
 	def Update(self):
 		self.spawnBadGuy()
 		self.spawnGuy()
-
+		
 		for i in self.entities:
 			i.Update(self)
 		
@@ -30,7 +30,7 @@ class World():
 
 	def addEntity(self, sprite, position, name=None):
 		if position in self.entityPosMap:
-			print("Cannot create Entity, Tile Occupied")
+			print(f"Cannot create Entity, Tile Occupied.  Position: {position}  tick: {self.ticks}")
 			return
 		self.entities.append(Entity(sprite, position, name, self))
 		self.UpdateArrays(self.entities[-1])

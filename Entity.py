@@ -20,9 +20,9 @@ class Entity():
 
 	def setPosition(self, position):
 		if position in self.world.entityPosMap:
-			print("Invalid position, Tile Occupied")
+			print(f"Invalid position, Tile Occupied.  Position: {position}  Entity: {self.name}  tick: {self.world.ticks}")
 			return
-
+		
 		del self.world.entityPosMap[self.getPosition()]
 		
 		self.positionX = position[0]
