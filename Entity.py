@@ -20,7 +20,7 @@ class Entity():
 
 	def setPosition(self, position):
 		if position in self.world.entityPosMap:
-			print(f"Invalid position, Tile Occupied.  Position: {position}  Entity: {self.name}  tick: {self.world.ticks}")
+			print(f"Invalid position, Tile Occupied.  Position: {position}  Entity: {self.name}  tick: {self.world.ticks}") #? potentially messes up pathfinding in the characters
 			return -1
 		
 		del self.world.entityPosMap[self.getPosition()]

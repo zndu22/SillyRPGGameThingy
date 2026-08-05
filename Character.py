@@ -43,7 +43,7 @@ class Character(Entity):
 	def Update(self, world):
 		# self.move((random.randint(-1, 1), random.randint(-1, 1)))
 		if self.pathfinder.hasPath(): 
-			self.Move(self.pathfinder.nextMove())
+			self.Move(self.pathfinder.nextMove()) #? I think this messes up the path if the move fails.
 			return
 		targetPos = addTuples(self.getPosition(), (random.randint(-10, 10), random.randint(-10, 10)))
 		if self.world.worldMap.isOutOfBounds(targetPos): return
