@@ -1,7 +1,7 @@
 import pygame
 
-windowHeight = 500
-windowWidth = 800
+windowHeight = 900
+windowWidth = 1600
 
 tileWidth = 64
 tileHeight = 64

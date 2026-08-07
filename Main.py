@@ -33,7 +33,7 @@ while running:
 	accumulator += deltaTime
 
 	while accumulator >= FixedDeltaTime:
-		world.Update()
+		if not input.keys[pygame.K_LALT]: world.Update()
 		accumulator -= FixedDeltaTime
 
 	renderer.RenderFrame(world, camera)

@@ -103,28 +103,37 @@ class Pathfinder:
 		dy = abs(a[1] - b[1])
 		return max(dx, dy) + 0.41421356237 * min(dx, dy)
 
+	# Reverses the path.
 	def reconstructPath(self, node):
 		positions = []
 
 		while node is not None:
 			positions.append(node.position)
 			node = node.parent
-		positions.reverse()
-		#
-		# Convert positions into movement vectors
-		#
-		moves = []
-		for i in range(1, len(positions)):
-			x0, y0 = positions[i - 1]
-			x1, y1 = positions[i]
-			moves.append((x1 - x0, y1 - y0))
-		return moves
 
-	# returns and pops the next move in the path
-	def nextMove(self):
+		positions.reverse()
+
+		if len(positions) > 1:
+			return positions[1:]  # skip the starting position
+		return []
+
+	# the next position
+	def nextPosition(self):
 		if self.path:
-			return self.path.popleft()
+			return self.path[0]
 		return None
+	
+	# the next required move
+	def nextMove(self, currentPosition=None):
+		if not self.path:
+			return None
+	
+		nextPos = self.path[0]
+		if currentPosition is None:
+			return None
+	
+		self.path.popleft()
+		return (nextPos[0] - currentPosition[0], nextPos[1] - currentPosition[1])
 
 	def hasPath(self):
 		return len(self.path) > 0

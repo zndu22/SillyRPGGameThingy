@@ -42,8 +42,9 @@ class Character(Entity):
 	
 	def Update(self, world):
 		# self.move((random.randint(-1, 1), random.randint(-1, 1)))
-		if self.pathfinder.hasPath(): 
-			self.Move(self.pathfinder.nextMove()) #? I think this messes up the path if the move fails.
+		if self.pathfinder.hasPath():
+			try: self.world.entityPosMap[self.pathfinder.nextPosition()] # if that tile is empty
+			except: self.Move(self.pathfinder.nextMove(self.getPosition())) # then move
 			return
 		targetPos = addTuples(self.getPosition(), (random.randint(-10, 10), random.randint(-10, 10)))
 		if self.world.worldMap.isOutOfBounds(targetPos): return

@@ -21,7 +21,10 @@ class Renderer():
 		for i in world.entities:
 			self.blit(i.sprite, self.toScreenSpace(world, camera, i.getPosition())) # sorry future me
 			if isinstance(i, Character):
-				pygame.draw.line(self.screen, (255, 0, 0), self.toScreenSpace(world, camera, i.getPosition()), self.toScreenSpace(world, camera, i.targetTile), 8)
+				for a, v in enumerate(i.pathfinder.path):
+					try:
+						pygame.draw.line(self.screen, (255, 0, 0), self.toScreenSpace(world, camera, v), self.toScreenSpace(world, camera, i.pathfinder.path[a+1]), 8)
+					except: pass
 
 		pygame.display.flip()
 	

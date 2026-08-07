@@ -17,6 +17,10 @@ class Input():
 			if event.type == pygame.QUIT:
 				self.QuitProgram = True
 			elif event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_f:
+					world.spawnGuy()
+				if event.key == pygame.K_SPACE:
+					world.Update()
 				if event.key == pygame.K_ESCAPE:
 					self.QuitProgram = True
 

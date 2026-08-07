@@ -20,8 +20,8 @@ class World():
 		self.entityPosMap = {}
 
 	def Update(self):
-		self.spawnBadGuy()
-		self.spawnGuy()
+		# self.spawnBadGuy()
+		# self.spawnGuy()
 		
 		for i in self.entities:
 			i.Update(self)
