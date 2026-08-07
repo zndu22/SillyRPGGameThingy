@@ -45,8 +45,10 @@ class Character(Entity):
 		if self.pathfinder.hasPath():
 			try: self.world.entityPosMap[self.pathfinder.nextPosition()] # if that tile is empty
 			except: self.Move(self.pathfinder.nextMove(self.getPosition())) # then move
-			return
-		targetPos = addTuples(self.getPosition(), (random.randint(-10, 10), random.randint(-10, 10)))
-		if self.world.worldMap.isOutOfBounds(targetPos): return
-		if self.world.worldMap.getPixel(targetPos[0], targetPos[1]) in self.validTiles:
-			self.pathfindTo(targetPos)
+			return # Then don't try to find a new path
+		# If there isn't a path, then...
+		targetPos = addTuples(self.getPosition(), (random.randint(-10, 10), random.randint(-10, 10))) # select a random target position
+		if self.world.worldMap.isOutOfBounds(targetPos): return # Throw it away if it's not in the world bounds
+		if self.world.worldMap.getPixel(targetPos[0], targetPos[1]) in self.validTiles: # and only if it's a valid tile,
+			self.pathfindTo(targetPos) # pathfind to that tile
+		#! I need to desperately re-write this logic. It sucks lwky (Highkey)
