@@ -52,3 +52,17 @@ class Character(Entity):
 		if self.world.worldMap.getPixel(targetPos[0], targetPos[1]) in self.validTiles: # and only if it's a valid tile,
 			self.pathfindTo(targetPos) # pathfind to that tile
 		#! I need to desperately re-write this logic. It sucks lwky (Highkey)
+
+		#? Instead I should:
+		# If hasPath(): 
+		# 	If nextPos is not empty:
+		#		Move(path.nextMove(don't pop)[::-1]) # off to the right
+		#		Move(path.nextMove(still don't pop)) # now make the move
+		#		Move(-x for x in path.nextMove(Now pop)) # now move back on track
+		# 	else: Move(Path.nextMove())
+
+		#! But I can see how this all could still result in some bugs. I need to come up with a better Entity avoidance system.
+		#? or I could just allow multiple entities to occupy the same tile? That'd be much easier.
+		#! But Then I'd have to do a bunch or refactoring and stuff... I don't wanna
+		#? Shut up, you're stupid, and I'm right, just do it.
+		#! fine...
