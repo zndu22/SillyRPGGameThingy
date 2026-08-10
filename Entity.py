@@ -20,11 +20,11 @@ class Entity():
 		return (self.positionX, self.positionY)
 
 	def setPosition(self, position):
-		if position in self.world.entityPosMap:
-			print(f"Invalid position, Tile Occupied.  Position: {position}  Entity: {self.name}  tick: {self.world.ticks}") #? potentially messes up pathfinding in the characters
-			return -1
+		# if position in self.world.entityPosMap:
+		# 	print(f"Invalid position, Tile Occupied.  Position: {position}  Entity: {self.name}  tick: {self.world.ticks}") #? potentially messes up pathfinding in the characters
+		# 	return -1
 		
-		del self.world.entityPosMap[self.getPosition()]
+		self.world.getEntitiesAtPos(self.getPosition()).remove(self)
 		
 		self.positionX = position[0]
 		self.positionY = position[1]
@@ -32,4 +32,4 @@ class Entity():
 		self.positionX = max(0, min(self.positionX, self.world.worldMap.rows   ))
 		self.positionY = max(0, min(self.positionY, self.world.worldMap.columns))
 
-		self.world.entityPosMap[self.getPosition()] = self
+		self.world.getEntitiesAtPos(self.getPosition()).append(self)

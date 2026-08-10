@@ -17,7 +17,7 @@ class World():
 		self.ticks = 0
 
 		self.entities: list[Entity] = []
-		self.entityPosMap = {}
+		self.entityPosMap = [[[] for _ in range(self.worldMap.rows)] for _ in range(self.worldMap.columns)]
 
 	def Update(self):
 		# self.spawnBadGuy()
@@ -41,13 +41,15 @@ class World():
 			return
 		self.entities.append(Character(sprite, position, name, stats, self))
 		self.UpdateArrays(self.entities[-1])
-		
+
+	def getEntitiesAtPos(self, pos):
+		return self.entityPosMap[pos[0]-1][pos[1]-1]
 
 	def UpdateArrays(self, entity):
 		if entity.name == None: entity.name = f"entity{len(self.entities)}"
 		if entity.id   == None: entity.id   = len(self.entities)
 
-		self.entityPosMap[(entity.positionX, entity.positionY)] = entity
+		self.entityPosMap[entity.positionX][entity.positionY] = entity
 
 	def spawnBadGuy(self):
 		tgtPos = (random.randint(0, self.worldMap.columns-1), random.randint(0, self.worldMap.rows-1))

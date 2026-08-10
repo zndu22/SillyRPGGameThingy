@@ -43,8 +43,7 @@ class Character(Entity):
 	def Update(self, world):
 		# self.move((random.randint(-1, 1), random.randint(-1, 1)))
 		if self.pathfinder.hasPath():
-			try: self.world.entityPosMap[self.pathfinder.nextPosition()] # if that tile is empty
-			except: self.Move(self.pathfinder.nextMove(self.getPosition())) # then move
+			self.Move(self.pathfinder.nextMove(self.getPosition()))
 			return # Then don't try to find a new path
 		# If there isn't a path, then...
 		targetPos = addTuples(self.getPosition(), (random.randint(-10, 10), random.randint(-10, 10))) # select a random target position
