@@ -7,8 +7,9 @@ class Entity():
 		self.positionX = position[0]
 		self.positionY = position[1]
 		self.name = name
-		self.sprite = sprite
 		self.id = None
+		
+		self.sprite = sprite
 
 		self.world = world
 	
