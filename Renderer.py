@@ -19,12 +19,12 @@ class Renderer():
 		self.blit(world.worldMap.tilemap, camera.getPosition())
 
 		for i in world.entities:
-			self.blit(i.sprite, self.toScreenSpace(world, camera, i.getPosition())) # sorry future me
+			self.blit(i.sprite, self.toScreenSpace(world, camera, i.getPosition()))
 			if isinstance(i, Character):
 				for a, v in enumerate(i.pathfinder.path):
 					try:
 						pygame.draw.line(self.screen, (255, 0, 0), self.toScreenSpace(world, camera, v), self.toScreenSpace(world, camera, i.pathfinder.path[a+1]), 8)
-					except: pass
+					except: pygame.draw.line(self.screen, (255, 0, 0), self.toScreenSpace(world, camera, v), self.toScreenSpace(world, camera, i.getPosition()), 8)
 
 		pygame.display.flip()
 	

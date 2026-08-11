@@ -36,7 +36,7 @@ while running:
 		if not input.keys[pygame.K_LALT]: world.Update()
 		accumulator -= FixedDeltaTime
 
-	renderer.RenderFrame(world, camera)
+	renderer.RenderFrame(world, camera)f
 	
 	if input.QuitProgram:
 		running = False
