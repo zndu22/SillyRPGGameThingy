@@ -40,7 +40,7 @@ class Character(Entity):
 		if dp is not None:
 			self.Move(dp)
 	
-	def Update(self, world):
+	def Updatee(self, world):
 		# self.move((random.randint(-1, 1), random.randint(-1, 1)))
 		if self.pathfinder.hasPath():
 			self.Move(self.pathfinder.nextMove(self.getPosition()))

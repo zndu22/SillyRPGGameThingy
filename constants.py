@@ -20,6 +20,13 @@ assets = {
 	"evilGuy" : pygame.image.load("assets/badGuy.png")
 }
 
+# def getAssetAtScale(name, scale):
+# 	if (name, scale) in assets:
+# 		return assets[(name, scale)]
+# 	else:
+# 		assets[(name, scale)] = pygame.transform.scale(assets[name], (tileWidth/scale, tileHeight/scale))
+# 		return assets[(name, scale)]
+
 def convertTextures():
 	global assets
 	for i, (k, v) in enumerate(assets.items()):

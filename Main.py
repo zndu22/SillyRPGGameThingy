@@ -6,6 +6,7 @@ from World import World
 from Renderer import Renderer
 from Camera import Camera
 from Input import Input
+from CharacterStats import CharacterStats
 
 pygame.init()
 
@@ -14,7 +15,7 @@ running = True
 renderer = Renderer()
 camera = Camera()
 world = World()
-input = Input()
+inputs = Input(world, camera)
 
 clock = pygame.time.Clock()
 
@@ -27,18 +28,18 @@ while running:
 
 	deltaTime = clock.tick() / 1000
 	
-	input.updateInputs(world)
-	input.MoveCamera(camera, cameraSpeed, deltaTime)
+	inputs.updateInputs()
+	inputs.MoveCamera(cameraSpeed, deltaTime)
 
 	accumulator += deltaTime
 
 	while accumulator >= FixedDeltaTime:
-		if not input.keys[pygame.K_LALT]: world.Update()
+		if not inputs.keys[pygame.K_LALT]: world.Update()
 		accumulator -= FixedDeltaTime
 
-	renderer.RenderFrame(world, camera)f
+	renderer.RenderFrame(world, camera)
 	
-	if input.QuitProgram:
+	if inputs.QuitProgram:
 		running = False
 
 
