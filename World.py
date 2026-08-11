@@ -43,13 +43,14 @@ class World():
 		self.UpdateArrays(self.entities[-1])
 
 	def getEntitiesAtPos(self, pos):
-		return self.entityPosMap[pos[0]-1][pos[1]-1]
+		return self.entityPosMap[pos[0]][pos[1]]
 
 	def UpdateArrays(self, entity):
 		if entity.name == None: entity.name = f"entity{len(self.entities)}"
 		if entity.id   == None: entity.id   = len(self.entities)
 
-		self.entityPosMap[entity.positionX][entity.positionY] = entity
+		self.getEntitiesAtPos(entity.getPosition()).append(entity)
+		#self.entityPosMap[entity.positionX][entity.positionY].append(entity)
 
 	def spawnBadGuy(self):
 		tgtPos = (random.randint(0, self.worldMap.columns-1), random.randint(0, self.worldMap.rows-1))
