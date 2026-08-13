@@ -21,18 +21,15 @@ class Renderer():
 
 		for i in world.entities:
 			tile = world.getEntitiesAtPos(i.getPosition())
-			if 1 < len(tile) <= 4:
-				scale = int(tileWidth/2)
-				sp = self.toScreenSpace(world, camera, i.getPosition())
-				sp = addTuples(sp, ((tile.index(i)%2) * scale, math.floor(tile.index(i)/2) * scale))
-				self.blit(pygame.transform.scale(i.sprite, (scale, scale)), sp)
-			elif 4 < len(tile):
-				scale = int(tileWidth/3)
-				sp = self.toScreenSpace(world, camera, i.getPosition())
-				sp = addTuples(sp, ((tile.index(i)%3) * scale, math.floor(tile.index(i)/3) * scale))
-				self.blit(pygame.transform.scale(i.sprite, (scale, scale)), sp)
-			else: 
+			if len(tile) == 1: 
 				self.blit(i.sprite, self.toScreenSpace(world, camera, i.getPosition()))
+			else: # brace yourself, this next part isn't pretty
+				lvl = math.ceil(math.sqrt(len(tile))) # find the closest square all the guys can fit in
+				scale = int(tileWidth/lvl) # find the scale those guys need to be to fit
+				sp = self.toScreenSpace(world, camera, i.getPosition()) # find the offset each guy needs to be at
+				sp = addTuples(sp, ((tile.index(i)%lvl) * scale, math.floor(tile.index(i)/lvl) * scale)) # add the guy's location
+				self.blit(pygame.transform.scale(i.sprite, (scale, scale)), sp) # and finally, draw the guy.
+				# I apoligize to anyone who had to read that.
 			if isinstance(i, Character):
 				if i.pathfinder.hasPath():
 					for a, v in enumerate(i.pathfinder.path):

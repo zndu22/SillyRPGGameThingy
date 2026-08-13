@@ -1,6 +1,7 @@
 from PIL import Image
-from pygame import Surface
+import pygame
 from constants import *
+import opensimplex
 
 class WorldMap():
 
@@ -11,7 +12,7 @@ class WorldMap():
         self.columns = self.getMapSize()[0]
         self.rows = self.getMapSize()[1]
 
-        self.tilemap = Surface((self.columns * tileWidth, self.rows * tileHeight))
+        self.tilemap = pygame.Surface((self.columns * tileWidth, self.rows * tileHeight))
 
     def getMapSize(self):
         return self.img.size
