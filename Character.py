@@ -40,28 +40,27 @@ class Character(Entity):
 		if dp is not None:
 			self.Move(dp)
 	
-	def Updatee(self, world):
-		# self.move((random.randint(-1, 1), random.randint(-1, 1)))
-		if self.pathfinder.hasPath():
-			self.Move(self.pathfinder.nextMove(self.getPosition()))
-			return # Then don't try to find a new path
-		# If there isn't a path, then...
-		targetPos = addTuples(self.getPosition(), (random.randint(-10, 10), random.randint(-10, 10))) # select a random target position
-		if self.world.worldMap.isOutOfBounds(targetPos): return # Throw it away if it's not in the world bounds
-		if self.world.worldMap.getPixel(targetPos[0], targetPos[1]) in self.validTiles: # and only if it's a valid tile,
-			self.pathfindTo(targetPos) # pathfind to that tile
-		#! I need to desperately re-write this logic. It sucks lwky (Highkey)
+	def Update(self, world):
+		pass # re-write all your garbagre code please... it sucked.
+		# No, I'm gonna put it in the monster and hero classes when I write them.
+		# okay, how're those gonna look?
+		
+		# Okay so, I'll have three Character types. NPCs, Monsters, and Heroes.
+		# NPCs will just wander around the town, I'll add them last.
+		# Monsters will spawn at a monster hideout or something and wander around the world, attacking heroes and NPCs.
+		# And Heroes will be adventuring, hunting monsters, and leveling up their skills and gear, ect.
 
-		#? Instead I should:
-		# If hasPath(): 
-		# 	If nextPos is not empty:
-		#		Move(path.nextMove(don't pop)[::-1]) # off to the right
-		#		Move(path.nextMove(still don't pop)) # now make the move
-		#		Move(-x for x in path.nextMove(Now pop)) # now move back on track
-		# 	else: Move(Path.nextMove())
+		# Each will have their own 'brain', that will determine how they behave. They will also have their own Stats, which will determine how the brain thinks.
+		# I'll use a utility based AI that uses specific skills and attributes to determine what to do next.
+		# For example: Two different heroes are both low on HP and in combat. One has a higher strength and Attack stat, so they'll continue fighting,
+		# While the other with lower stats will flee.
 
-		#! But I can see how this all could still result in some bugs. I need to come up with a better Entity avoidance system.
-		#? or I could just allow multiple entities to occupy the same tile? That'd be much easier.
-		#! But Then I'd have to do a bunch or refactoring and stuff... I don't wanna
-		#? Shut up, you're stupid, and I'm right, just do it.
-		#! fine...
+		# Monsters and NPCs will also have their own stats, but will not think as much on what to do. NPCs will just wander and flee combat.
+		# While Monsters will wander and look for combat.
+
+		# ---| What needs to be done in the future? |---
+		# -> Create a 'brain' class for Monsters and Heroes, just for testing.
+		# -> Impliment combat between two characters.
+		# -> Impliment inventories and equietment.
+		# -> Impliment skills and xp
+		# -> Potentially, re-write the A* code so I understand it better.
