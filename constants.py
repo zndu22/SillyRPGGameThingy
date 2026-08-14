@@ -18,7 +18,8 @@ assets = {
 	"MountianTexture" : pygame.image.load("assets/mountian.png"),
 	"guy" : pygame.image.load("assets/guy.png"),
 	"evilGuy" : pygame.image.load("assets/badGuy.png"),
-	"cursor" : pygame.image.load("assets/cursor.png")
+	"cursor" : pygame.image.load("assets/cursor.png"),
+	"house" : pygame.image.load("assets/house.png")
 }
 
 # def getAssetAtScale(name, scale):
