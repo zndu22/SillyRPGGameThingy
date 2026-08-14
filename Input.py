@@ -24,6 +24,7 @@ class Input():
 		self.mouse = pygame.mouse.get_pressed()
 		self.mousePos = pygame.mouse.get_pos()
 		self.mouseMotion = pygame.mouse.get_rel() 
+		self.mouseWorldPos = ( math.floor((self.mousePos[0] - self.camera.positionX)/tileWidth) , math.floor((self.mousePos[1] - self.camera.positionY)/tileHeight) )
 
 		if self.keys[pygame.K_g]:
 			self.world.spawnGuy()
@@ -34,8 +35,7 @@ class Input():
 
 			elif event.type == pygame.MOUSEBUTTONDOWN:
 				if event.button == 1:
-					tgtPos = ( math.floor((self.mousePos[0] - self.camera.positionX)/tileWidth) , math.floor((self.mousePos[1] - self.camera.positionY)/tileHeight) )
-					self.world.addCharacter(assets['guy'], tgtPos, CharacterStats(10))
+					self.world.addCharacter(assets['guy'], self.mouseWorldPos, CharacterStats(10))
 				if event.button == 2:  # 2 is Middle Click
 					self.isDragging = True
 			elif event.type == pygame.MOUSEBUTTONUP:

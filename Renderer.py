@@ -5,19 +5,23 @@ import math
 from World import World
 from Camera import Camera
 from Character import Character
+from Input import Input
 
 class Renderer():
 
-	def __init__(self):
+	def __init__(self, inputs: Input):
 		self.screen = pygame.display.set_mode((windowWidth, windowHeight), pygame.RESIZABLE)
 		self.icon = pygame.image.load("assets/icon.png")
 		pygame.display.set_icon(self.icon)
+		self.inputs = inputs
 
 		convertTextures()
 	
 	def RenderFrame(self, world: World, camera: Camera):
 		self.screen.fill((0, 0, 0))
 		self.blit(world.worldMap.tilemap, camera.getPosition())
+
+		self.blit(assets["cursor"], self.toScreenSpace(world, camera, self.inputs.mouseWorldPos))
 
 		for i in world.entities:
 			tile = world.getEntitiesAtPos(i.getPosition())

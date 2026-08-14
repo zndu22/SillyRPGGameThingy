@@ -12,10 +12,10 @@ pygame.init()
 
 running = True
 
-renderer = Renderer()
 camera = Camera()
 world = World()
 inputs = Input(world, camera)
+renderer = Renderer(inputs)
 
 clock = pygame.time.Clock()
 
