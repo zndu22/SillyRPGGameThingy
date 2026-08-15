@@ -1,7 +1,7 @@
 from PIL import Image
 import pygame
 from constants import *
-import opensimplex
+#import opensimplex
 
 class WorldMap():
 

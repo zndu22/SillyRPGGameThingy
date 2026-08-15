@@ -1,4 +1,4 @@
-#Handles the world and all the Entities in it.
+from __future__ import annotations
 from constants import *
 import random
 
@@ -7,7 +7,7 @@ from Entity import Entity
 from CharacterStats import CharacterStats
 from Character import Character
 
-
+#Handles the world and all the Entities in it.
 class World():
 
 	def __init__(self):
@@ -24,7 +24,7 @@ class World():
 		# self.spawnGuy()
 		
 		for i in self.entities:
-			i.Update(self)
+			i.Update()
 		
 		self.ticks += 1
 

@@ -1,10 +1,14 @@
+from __future__ import annotations
 import pygame
 from constants import *
 import math
 
-from World import World
-from Camera import Camera
 from CharacterStats import CharacterStats
+
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+	from World import World
+	from Camera import Camera
 
 class Input():
 
@@ -35,7 +39,7 @@ class Input():
 
 			elif event.type == pygame.MOUSEBUTTONDOWN:
 				if event.button == 1:
-					self.world.addCharacter(assets['guy'], self.mouseWorldPos, CharacterStats(10))
+					self.world.addCharacter(assets['guy'], self.mouseWorldPos, CharacterStats(10, 0, 0, 0, 0))
 				if event.button == 2:  # 2 is Middle Click
 					self.isDragging = True
 			elif event.type == pygame.MOUSEBUTTONUP:

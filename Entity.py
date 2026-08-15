@@ -13,7 +13,7 @@ class Entity():
 
 		self.world = world
 	
-	def Update(self, world):
+	def Update(self):
 		pass
 	
 	def getPosition(self):

@@ -1,17 +1,23 @@
+from __future__ import annotations
 from constants import *
 import random
 
 from Entity import Entity
-from CharacterStats import CharacterStats
 from Pathfinder import Pathfinder
+
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+	from CharacterStats import CharacterStats
+	from World import World 
+
 
 class Character(Entity):
 	
-	def __init__(self, sprite, position, name, stats:CharacterStats, world):
+	def __init__(self, sprite, position, name, stats: CharacterStats, world: World):
 		super().__init__(sprite, position, name, world)
 
-		self.characterStats:CharacterStats = stats
-		self.HP = self.characterStats.maxHP
+		self.characterStats: CharacterStats = stats
+		self.HP = self.characterStats.maxHealth
 		self.validTiles = [grassColor, mountianColor]
 
 		self.pathfinder = Pathfinder(self.world, self.validTiles)
@@ -40,7 +46,7 @@ class Character(Entity):
 		if dp is not None:
 			self.Move(dp)
 	
-	def Update(self, world):
+	def Update(self):
 		pass # re-write all your garbagre code please... it sucked.
 		# No, I'm gonna put it in the monster and hero classes when I write them.
 		# okay, how're those gonna look?
