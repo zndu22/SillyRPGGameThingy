@@ -3,9 +3,9 @@ from constants import *
 import random
 
 from WorldMap import WorldMap
-from Entity import Entity
+from Entities.Entity import Entity
 from CharacterStats import CharacterStats
-from Character import Character
+from Entities.Character import Character
 
 #Handles the world and all the Entities in it.
 class World():
@@ -34,6 +34,7 @@ class World():
 			return
 		self.entities.append(Entity(sprite, position, name, self))
 		self.UpdateArrays(self.entities[-1])
+		return self.entities[-1]
 
 	def addCharacter(self, sprite, position, stats, name=None):
 		if position in self.entityPosMap:
@@ -41,6 +42,7 @@ class World():
 			return
 		self.entities.append(Character(sprite, position, name, stats, self))
 		self.UpdateArrays(self.entities[-1])
+		return self.entities[-1]
 
 	def getEntitiesAtPos(self, pos):
 		return self.entityPosMap[pos[0]][pos[1]]

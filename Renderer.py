@@ -4,7 +4,7 @@ import math
 
 from World import World
 from Camera import Camera
-from Character import Character
+from Entities.Character import Character
 from Input import Input
 
 class Renderer():

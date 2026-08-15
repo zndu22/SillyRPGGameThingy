@@ -2,7 +2,7 @@ from __future__ import annotations
 from constants import *
 import random
 
-from Entity import Entity
+from Entities.Entity import Entity
 from Pathfinder import Pathfinder
 
 from typing import TYPE_CHECKING
