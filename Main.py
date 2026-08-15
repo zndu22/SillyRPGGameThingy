@@ -23,7 +23,7 @@ TicksPerSecond = 10
 FixedDeltaTime = 1 / TicksPerSecond
 accumulator = 0
 
-world.addEntity(assets["house"], (100, 100))
+world.addEntity(assets["house"], (1, 1))
 # There will be at least one other type of entity.
 # buildings, which will be enterable by heroes and provide services, such as stores, guilds, or taverns.
 # And props, which will be decoration around the world. Either passable, like a bridge, or not, like a wall or rock.

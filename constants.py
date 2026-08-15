@@ -19,7 +19,7 @@ assets = {
 	"guy" : pygame.image.load("assets/guy.png"),
 	"evilGuy" : pygame.image.load("assets/badGuy.png"),
 	"cursor" : pygame.image.load("assets/cursor.png"),
-	"house" : pygame.image.load("assets/house.png")
+	"house" : pygame.image.load("assets/house1.png")
 }
 
 # def getAssetAtScale(name, scale):
