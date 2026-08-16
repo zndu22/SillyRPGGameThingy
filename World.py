@@ -47,17 +47,16 @@ class World():
 	def getEntitiesAtPos(self, pos):
 		return self.entityPosMap[pos[0]][pos[1]]
 
+	def getEntitiesInRadius(self, pos, radius=1):
+		arr = []
+		for i in range(pos[0] - radius, pos[0] + radius + 1):
+			for j in range(pos[1] - radius, pos[1] + radius + 1):
+				for k in self.getEntitiesAtPos((i, j)): arr.append(k)
+		return arr 
+
 	def UpdateArrays(self, entity):
 		if entity.name == None: entity.name = f"entity{len(self.entities)}"
 		if entity.id   == None: entity.id   = len(self.entities)
 
 		self.getEntitiesAtPos(entity.getPosition()).append(entity)
 		#self.entityPosMap[entity.positionX][entity.positionY].append(entity)
-
-	def spawnBadGuy(self):
-		tgtPos = (random.randint(0, self.worldMap.columns-1), random.randint(0, self.worldMap.rows-1))
-		if self.worldMap.getPixel(tgtPos[0], tgtPos[1]) == mountianColor: self.addCharacter(assets['evilGuy'], tgtPos, CharacterStats(10))
-	
-	def spawnGuy(self):
-		tgtPos = (random.randint(0, self.worldMap.columns-1), random.randint(0, self.worldMap.rows-1))
-		if self.worldMap.getPixel(tgtPos[0], tgtPos[1]) == grassColor: self.addCharacter(assets['guy'], tgtPos, CharacterStats(10))

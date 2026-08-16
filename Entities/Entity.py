@@ -12,6 +12,9 @@ class Entity():
 		self.sprite = sprite
 
 		self.world = world
+
+	def __str__(self):
+		return f"{self.name} at position: {self.getPosition()}."
 	
 	def Update(self):
 		pass

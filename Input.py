@@ -30,9 +30,6 @@ class Input():
 		self.mouseMotion = pygame.mouse.get_rel() 
 		self.mouseWorldPos = ( math.floor((self.mousePos[0] - self.camera.positionX)/tileWidth) , math.floor((self.mousePos[1] - self.camera.positionY)/tileHeight) )
 
-		if self.keys[pygame.K_g]:
-			self.world.spawnGuy()
-
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				self.QuitProgram = True
@@ -48,7 +45,8 @@ class Input():
 
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_f:
-					self.world.spawnGuy()
+					for i in self.world.getEntitiesInRadius(self.mouseWorldPos, 10): print(f"{i},")
+					print("")
 				if event.key == pygame.K_SPACE:
 					self.world.Update()
 				if event.key == pygame.K_ESCAPE:
