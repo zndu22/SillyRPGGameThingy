@@ -6,6 +6,7 @@ from WorldMap import WorldMap
 from Entities.Entity import Entity
 from CharacterStats import CharacterStats
 from Entities.Character import Character
+from Brains.Brain import Brain
 
 #Handles the world and all the Entities in it.
 class World():
@@ -40,7 +41,7 @@ class World():
 		if position in self.entityPosMap:
 			print("Cannot create Entity, Tile Occupied")
 			return
-		self.entities.append(Character(sprite, position, name, stats, self))
+		self.entities.append(Character(sprite, position, name, stats, Brain(), self))
 		self.UpdateArrays(self.entities[-1])
 		return self.entities[-1]
 

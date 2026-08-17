@@ -4,12 +4,13 @@ import random
 
 from Entities.Entity import Entity
 from Pathfinder import Pathfinder
-from brains.Brain import Brain
+from Brains.Brain import Brain
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
 	from CharacterStats import CharacterStats
 	from World import World 
+	from Actions.Action import Action
 
 
 class Character(Entity):
@@ -22,8 +23,9 @@ class Character(Entity):
 			"health" : self.characterStats.getMaxHealth()
 		}
 
-		self.brian = brain
-		self.brian.character = self
+		self.brain = brain
+		self.brain.character = self
+		self.currentAction: Action = None
 
 		
 		self.validTiles = [grassColor, mountianColor]
@@ -50,6 +52,10 @@ class Character(Entity):
 		dp = self.pathfinder.nextMove()
 		if dp is not None:
 			self.Move(dp)
+
+	def hasAction(self):
+		return not self.currentAction == None
 	
 	def Update(self):
-		pass
+
+		self.brain.think()

@@ -4,7 +4,7 @@ from constants import *
 import math
 
 from CharacterStats import CharacterStats
-from brains.Brain import Brain
+from Brains.Brain import Brain
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:

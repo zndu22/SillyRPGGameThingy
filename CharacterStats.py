@@ -18,19 +18,17 @@ class CharacterStats():
 			"agility" : Agility, # affects speed and encumberence
 			"defence" : Defence # affects damage taken
 		}
-
-		def getLevel(self, skill):
-			return 10 * self.stats[skill] ^ 2
-
-		def addExperience(self, skill, experience):
-			self.stats[skill] += experience
-
-		def getMaxHealth(self):
-			return 10 + (4 * self.stats["health"])
-
 		# I'm thinking of only tracking xp, and determining level solely based on that.
 		# I only have 10 skills, and the max skill level would be 10. The character's level is the sum of all their skills, meaning the max character level is 100.
 
 		# only xp is tracked here. Level number is derived from xp, using a formula like: f(x) = 10x^2,
 		# This gives an exponential curve, that still doesn't feel like too much of a chore. No "92 is half of 99" shenanigans.
+	def getLevel(self, skill):
+		return 10 * self.stats[skill] ^ 2
+
+	def addExperience(self, skill, experience):
+		self.stats[skill] += experience
+
+	def getMaxHealth(self):
+		return 10 + (4 * self.stats["health"])
 
