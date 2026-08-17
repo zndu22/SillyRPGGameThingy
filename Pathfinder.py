@@ -124,13 +124,14 @@ class Pathfinder:
 	
 	# the next required move
 	def nextMove(self, currentPosition=None, removeMove=True):
-		if not self.path:
-			return None
+		if not self.hasPath():
+			print("Path failed")
+			return (0, 0)
 	
 		nextPos = self.path[0]
 		if currentPosition is None:
-			return None
-	
+			return (0, 0)
+
 		if removeMove: self.path.popleft()
 		return (nextPos[0] - currentPosition[0], nextPos[1] - currentPosition[1])
 
