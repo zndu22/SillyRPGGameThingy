@@ -3,20 +3,30 @@ from constants import *
 class CharacterStats():
 	
 	def __init__(self, Health=0, Stamina=0, Mana=0, Strength=0, Intelligence=0, Finesse=0, Concentration=0, Precision=0, Agility=0, Defence=0):
-		# Maybe make this all a dict instead?
-		self.Health = Health # affects max HP
-		self.Stamina = Stamina # affects max Stamina
-		self.Mana = Mana # affects max mana
+		self.stats = {
+			"health" : Health, # affects max HP
+			"stamina" : Stamina, # affects max Stamina
+			"mana" : Mana, # affects max mana
 
-		self.Strength = Strength # affects physical damage calculations
-		self.Intelligence = Intelligence # affects magic damage calculations
+			"strength" : Strength, # affects melee damage calculations
+			"intelligence" : Intelligence, # affects magic damage calculations
 
-		self.Finesse = Finesse # affects melee hit chance
-		self.Concentration = Concentration # affects magic hit chance
-		self.Precision = Precision # affects ranged hit chance. Damage is determined by ammo type and weapon
+			"finesse" : Finesse, # affects melee hit chance
+			"concentration" : Concentration, # affects magic hit chance
+			"precision" : Precision, # affects ranged hit chance. Damage is determined by ammo type and weapon
 
-		self.Agility = Agility # affects speed and encumberence
-		self.Defence = Defence # affects damage taken
+			"agility" : Agility, # affects speed and encumberence
+			"defence" : Defence # affects damage taken
+		}
+
+		def getLevel(self, skill):
+			return 10 * self.stats[skill] ^ 2
+
+		def addExperience(self, skill, experience):
+			self.stats[skill] += experience
+
+		def getMaxHealth(self):
+			return 10 + (4 * self.stats["health"])
 
 		# I'm thinking of only tracking xp, and determining level solely based on that.
 		# I only have 10 skills, and the max skill level would be 10. The character's level is the sum of all their skills, meaning the max character level is 100.

@@ -7,8 +7,8 @@ if TYPE_CHECKING:
 
 class Brain():
 
-	def __init__(self, character: Character):
-		self.character = character
+	def __init__(self):
+		self.character: Character
 	
 	def think(self):
 		pass

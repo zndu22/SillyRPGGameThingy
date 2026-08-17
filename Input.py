@@ -4,6 +4,7 @@ from constants import *
 import math
 
 from CharacterStats import CharacterStats
+from brains.Brain import Brain
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -36,7 +37,7 @@ class Input():
 
 			elif event.type == pygame.MOUSEBUTTONDOWN:
 				if event.button == 1:
-					self.world.addCharacter(assets['guy'], self.mouseWorldPos, CharacterStats())
+					self.world.addCharacter(assets['guy'], self.mouseWorldPos, CharacterStats(), Brain())
 				if event.button == 2:  # 2 is Middle Click
 					self.isDragging = True
 			elif event.type == pygame.MOUSEBUTTONUP:
