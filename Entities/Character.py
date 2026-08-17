@@ -57,5 +57,6 @@ class Character(Entity):
 		return not self.currentAction == None
 	
 	def Update(self):
-
+		if self.hasAction():
+			self.currentAction.update()
 		self.brain.think()

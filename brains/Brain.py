@@ -18,6 +18,7 @@ class Brain():
 	def think(self):
 		if not self.character.hasAction():
 			self.character.currentAction = Wander(self.character)
+			self.character.currentAction.start()
 
 		if self.character.currentAction.isFinished:
 			self.character.currentAction = None

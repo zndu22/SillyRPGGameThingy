@@ -18,6 +18,7 @@ class Action():
 
         if self.isFinished:
             self.end()
+            return
 
     def end(self):
         pass

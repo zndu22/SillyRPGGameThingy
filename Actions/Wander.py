@@ -14,15 +14,14 @@ class Wander(Action):
         super().__init__(character)
 
     def start(self):
-        if not self.character.pathfinder.hasPath():
-            self.character.pathfindTo((self.character.positionX + randint(-10, 10), self.character.positionY + randint(-10, 10)))
+        self.character.pathfindTo((self.character.positionX + randint(-10, 10), self.character.positionY + randint(-10, 10)))
     
     def update(self):
-        
-        self.character.Move(self.character.pathfinder.nextMove(self.character.getPosition())) # Move along the path
-        self.isFinished = self.character.pathfinder.finishedPath() # Trigger finished if the path is finished
-
         super().update()
+
+        self.character.Move(self.character.pathfinder.nextMove(self.character.getPosition())) # Move along the path
+        if self.character.pathfinder.finishedPath():
+            self.isFinished = True # Trigger finished if the path is finished
 
     def end(self):
         self.character.pathfinder.haltPath()

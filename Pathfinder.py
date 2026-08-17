@@ -11,7 +11,7 @@ class Pathfinder:
 		self.world = world
 		self.path = deque()
 		self.walkableTiles = walkableTiles
-	# sets the path variable to a list of movements to get to the end.
+
 	def findPath(self, start, goal):
 		openSet = []
 		closedSet = set()
