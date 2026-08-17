@@ -36,7 +36,7 @@ class Input():
 
 			elif event.type == pygame.MOUSEBUTTONDOWN:
 				if event.button == 1:
-					self.world.addCharacter(assets['guy'], self.mouseWorldPos, CharacterStats(10, 0, 0, 0, 0))
+					self.world.addCharacter(assets['guy'], self.mouseWorldPos, CharacterStats())
 				if event.button == 2:  # 2 is Middle Click
 					self.isDragging = True
 			elif event.type == pygame.MOUSEBUTTONUP:
