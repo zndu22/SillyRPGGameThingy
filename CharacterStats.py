@@ -8,14 +8,14 @@ class CharacterStats():
 			"stamina" : Stamina, # affects max Stamina
 			"mana" : Mana, # affects max mana
 
-			"strength" : Strength, # affects melee damage calculations
+			"strength" : Strength, # affects melee damage calculations, and encumberence
 			"intelligence" : Intelligence, # affects magic damage calculations
 
 			"finesse" : Finesse, # affects melee hit chance
 			"concentration" : Concentration, # affects magic hit chance
 			"precision" : Precision, # affects ranged hit chance. Damage is determined by ammo type and weapon
 
-			"agility" : Agility, # affects speed and encumberence
+			"agility" : Agility, # affects speed and also affects encumberence
 			"defence" : Defence # affects damage taken
 		}
 		# I'm thinking of only tracking xp, and determining level solely based on that.
@@ -23,6 +23,7 @@ class CharacterStats():
 
 		# only xp is tracked here. Level number is derived from xp, using a formula like: f(x) = 10x^2,
 		# This gives an exponential curve, that still doesn't feel like too much of a chore. No "92 is half of 99" shenanigans.
+
 	def getLevel(self, skill):
 		return 10 * self.stats[skill] ^ 2
 

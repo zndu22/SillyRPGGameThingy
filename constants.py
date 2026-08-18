@@ -1,4 +1,5 @@
 import pygame
+import math
 
 windowHeight = 450
 windowWidth = 800
@@ -29,6 +30,8 @@ assets = {
 # 		assets[(name, scale)] = pygame.transform.scale(assets[name], (tileWidth/scale, tileHeight/scale))
 # 		return assets[(name, scale)]
 
+cornerDist = 1.42
+
 def convertTextures():
 	global assets
 	for i, (k, v) in enumerate(assets.items()):
@@ -36,3 +39,10 @@ def convertTextures():
 
 def addTuples(a, b):
 	return tuple(x + y for x, y in zip(a, b))
+
+def subtractTuples(a, b):
+	return tuple(x - y for x, y in zip(a, b))
+
+def distance(a, b):
+	delta = subtractTuples(b, a)
+	return math.hypot(delta[0], delta[1])

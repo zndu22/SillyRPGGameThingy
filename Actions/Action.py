@@ -15,10 +15,15 @@ class Action():
         pass
 
     def update(self):
+        pass
 
-        if self.isFinished:
-            self.end()
-            return
+    def finish(self):
+        if not self.isFinished:
+            self.isFinished = True
+        self.end()
 
     def end(self):
         pass
+
+    def getUtility(self):
+        return 0.0
