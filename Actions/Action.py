@@ -24,3 +24,6 @@ class Action():
 
     def end(self):
         pass
+
+    def getUtility(self):
+        return 0.0

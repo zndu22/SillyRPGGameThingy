@@ -18,6 +18,8 @@ class Character(Entity):
 	def __init__(self, sprite, position, name, stats: CharacterStats, brain: Brain, world: World):
 		super().__init__(sprite, position, name, world)
 
+		self.tags.append("Character")
+
 		self.characterStats: CharacterStats = stats
 		self.state = { # this is the current physical state of the character,
 			"health" : self.characterStats.getMaxHealth()
@@ -27,7 +29,7 @@ class Character(Entity):
 		#! To future me: Don't mix up the two
 
 		self.brain = brain
-		self.brain.character = self # I wish I could do this better, but it works I guess.
+		self.brain.setup(self)
 		self.currentAction: Action = None
 
 		
@@ -47,6 +49,10 @@ class Character(Entity):
 		if self.world.worldMap.getPixel(targetPos[0], targetPos[1]) in self.validTiles:
 			self.setPosition(targetPos)
 
+	def canAttack(self, target):
+		atkRange = cornerDist # this is a placeholder. Reaplce with main weapon range
+		return distance(self.getPosition(), target) < atkRange
+
 	def pathfindTo(self, target): # Tells the pathfinder to create a path to target
 		self.targetTile = target
 
@@ -63,7 +69,8 @@ class Character(Entity):
 		if self.hasAction(): # If we have an action,
 			self.currentAction.update() # Do that action
 
-		if self.currentAction.isFinished: # If that action is finished
-			self.currentAction.finish() # trigger the cleanup code
-			self.currentAction = None # and remove that action
+			if self.currentAction.isFinished: # If that action is finished
+				self.currentAction.finish() # trigger the cleanup code
+				self.currentAction = None # and remove that action
+				
 		self.brain.think()

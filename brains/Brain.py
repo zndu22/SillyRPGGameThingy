@@ -2,7 +2,7 @@ from __future__ import annotations
 from constants import *
 
 from Actions.Wander import Wander
-from enum import Enum
+from States import States
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -11,23 +11,21 @@ if TYPE_CHECKING:
 	from Entities.Character import Character
 	from Actions.Action import Action
 
-class States(str, Enum):
-	Wander = "wander"
-	Combat = "combat"
-	Idle   = "idle"
-
 class Brain():
 
 	def __init__(self):
 		self.character: Character
 		self.state = States.Wander
+
+	def setup(self, character: Character):
+		self.character = character
 		self.actionsPerState: Dict[str, List[Action]] = {
-			States.Wander : [Wander(self.character)],
+			States.Wander : [],
 			States.Combat : [],
 			States.Idle : []
 		}
-	
+
 	def think(self):
-		if not self.character.hasAction():
-			self.character.currentAction = Wander(self.character)
-			self.character.currentAction.start()
+		if not self.character.hasAction(): # if the character has no action,
+			# Set the characters current action to the best action (highest utility score) for the current state.
+			self.character.currentAction = max(self.actionsPerState[self.state], key=lambda i: i.getUtility)

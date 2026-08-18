@@ -1,6 +1,10 @@
 from constants import *
 import random
 
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+	from typing import List
+
 class Entity():
 
 	def __init__(self, sprite, position, name, world):
@@ -8,6 +12,9 @@ class Entity():
 		self.positionY = position[1]
 		self.name = name
 		self.id = None
+		self.tags: List[str] = [] # Used to identify what type of entity it is.
+		# For example, Heroes will have a 'hero' tag, while structures will have a 'structure'.
+		# Some structures might have an 'impassiable' tag. This info would be checked by the pathfinder in this example.
 		
 		self.sprite = sprite
 
@@ -23,10 +30,6 @@ class Entity():
 		return (self.positionX, self.positionY)
 
 	def setPosition(self, position):
-		# if position in self.world.entityPosMap:
-		# 	print(f"Invalid position, Tile Occupied.  Position: {position}  Entity: {self.name}  tick: {self.world.ticks}") #? potentially messes up pathfinding in the characters
-		# 	return -1
-		
 		self.world.getEntitiesAtPos(self.getPosition()).remove(self)
 		
 		self.positionX = position[0]
