@@ -17,8 +17,6 @@ class Wander(Action):
         self.character.pathfindTo((self.character.positionX + randint(-10, 10), self.character.positionY + randint(-10, 10)))
     
     def update(self):
-        super().update()
-
         self.character.Move(self.character.pathfinder.nextMove(self.character.getPosition())) # Move along the path
         if self.character.pathfinder.finishedPath():
             self.isFinished = True # Trigger finished if the path is finished
