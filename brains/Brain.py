@@ -1,8 +1,10 @@
 from __future__ import annotations
 from constants import *
 
-from Actions.Wander import Wander
 from States import States
+from Actions.Wander import Wander
+from Actions.Rest import Rest
+from Actions.Attack import Attack
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -20,8 +22,8 @@ class Brain():
 	def setup(self, character: Character):
 		self.character = character
 		self.actionsPerState: Dict[str, List[Action]] = {
-			States.Wander : [],
-			States.Combat : []
+			States.Wander : [Wander(self.character), Rest(self.character)], # Wander action, Rest action
+			States.Combat : [Attack(self.character)] 	# Attack action, Flee action
 		}
 
 	def think(self):
