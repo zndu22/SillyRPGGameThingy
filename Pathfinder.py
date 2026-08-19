@@ -73,14 +73,14 @@ class Pathfinder:
 			nx = x + dx
 			ny = y + dy
 			# eventually check for impassible props here (buildings, walls, ect.) vvv
-			if not self.world.worldMap.getPixel(nx, ny) in self.walkableTiles:
+			if not self.tileWalkable(nx, ny):
 				continue
 			# Prevent corner cutting
 			if dx != 0 and dy != 0:
 				if (					
-					not self.world.worldMap.getPixel(x+dx, y) in self.walkableTiles
+					not self.tileWalkable(x+dx, y)
 					or
-					not self.world.worldMap.getPixel(x, y+dy) in self.walkableTiles
+					not self.tileWalkable(x, y+dy)
 				):
 					continue
 			if dx == 0 or dy == 0:
@@ -89,6 +89,10 @@ class Pathfinder:
 				cost = math.sqrt(2)
 			neighbors.append(((nx, ny), cost))
 		return neighbors
+
+	def tileWalkable(self, pos):
+		x, y = pos
+		self.world.worldMap.getPixel(x, y) in self.walkableTiles
 
 	def heuristic(self, a, b):
 		dx = abs(a[0] - b[0])
