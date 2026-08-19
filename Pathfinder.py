@@ -72,22 +72,15 @@ class Pathfinder:
 		for dx, dy in offsets:
 			nx = x + dx
 			ny = y + dy
+			# eventually check for impassible props here (buildings, walls, ect.) vvv
 			if not self.world.worldMap.getPixel(nx, ny) in self.walkableTiles:
 				continue
-			#
 			# Prevent corner cutting
-			#
 			if dx != 0 and dy != 0:
-
-				if (
-					# not self.world.isWalkable(x + dx, y)
-					# or
-					# not self.world.isWalkable(x, y + dy)
-					
+				if (					
 					not self.world.worldMap.getPixel(x+dx, y) in self.walkableTiles
 					or
 					not self.world.worldMap.getPixel(x, y+dy) in self.walkableTiles
-
 				):
 					continue
 			if dx == 0 or dy == 0:
