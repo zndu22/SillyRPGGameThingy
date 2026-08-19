@@ -50,7 +50,8 @@ class Character(Entity):
 			self.setPosition(targetPos)
 
 	def canAttack(self, target):
-		atkRange = cornerDist # this is a placeholder. Reaplce with main weapon range
+		atkRange = cornerDist # this is a placeholder.
+		# ^^ replace with a weapon range when you add the inventory system.
 		return distance(self.getPosition(), target) < atkRange
 
 	def pathfindTo(self, target): # Tells the pathfinder to create a path to target
