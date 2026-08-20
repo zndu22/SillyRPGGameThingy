@@ -29,3 +29,6 @@ class Wander(Action):
 
     def end(self):
         self.character.pathfinder.haltPath()
+    
+    def getUtility(self):
+        return 1.0

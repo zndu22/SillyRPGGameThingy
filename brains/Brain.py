@@ -1,7 +1,7 @@
 from __future__ import annotations
 from constants import *
 
-from States import States
+from Brains.States import States
 from Actions.Wander import Wander
 from Actions.Rest import Rest
 from Actions.Attack import Attack
@@ -29,7 +29,8 @@ class Brain():
 	def think(self):
 		if not self.character.hasAction(): # if the character has no action,
 			# Set the characters current action to the best action (highest utility score) for the current state.
-			self.character.currentAction = max(self.actionsPerState[self.state], key=lambda i: i.getUtility)
+			#self.character.currentAction = max(self.actionsPerState[self.state], key=lambda i: i.getUtility())
+			self.character.currentAction = Wander(self.character)
 
 	def updateState():
 		# manages the FSM. Really just used to determine what situation the character is currently in.

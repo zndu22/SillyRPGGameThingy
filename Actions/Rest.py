@@ -31,4 +31,4 @@ class Rest(Action):
         pass
 
     def getUtility(self):
-        return
+        return 0.0
