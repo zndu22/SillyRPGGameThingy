@@ -1,6 +1,8 @@
 At the state it's in right now, This is a very simple 2d engine for handling a tilemap and entities and such. It's written with python 3.8.10 mainly.
 There's some pathfinding code that was provided by my good friend Chet Gepeiti, but it lowkey sucks and I'll probably re-write it once I get bored of procrsatinating (And actually understand the A* algorithm).
 
+To run, you need Python3 (I don't think the exact version matters), Pygame, and Pillow
+
 # The Engine has two main parts:
 
 ## The Tilemap:
