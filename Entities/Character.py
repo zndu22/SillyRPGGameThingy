@@ -22,7 +22,8 @@ class Character(Entity):
 
 		self.characterStats: CharacterStats = stats
 		self.state = { # this is the current physical state of the character,
-			"health" : self.characterStats.getMaxHealth()
+			"health" : self.characterStats.getMaxHealth(),
+			"stamina" : self.characterStats.getMaxStamina()
 			# Things like Current Health, Mana, Stamina, ect. will be stored here
 		}
 		# The state in the brain class is the state of the FSM/utility thingy.

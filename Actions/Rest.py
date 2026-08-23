@@ -21,6 +21,7 @@ class Rest(Action):
     def update(self):
         if self.tickCounter >= self.ticksPerHeal: 
             self.character.Heal(1)
+            self.character.state["stamina"] += 1
             self.tickCounter = 0
         else:
             self.tickCounter += 1
@@ -31,4 +32,4 @@ class Rest(Action):
         pass
 
     def getUtility(self):
-        return
+        return (-1 * math.sqrt(self.character.state["health"]/self.character.characterStats.getMaxHealth)) + 1

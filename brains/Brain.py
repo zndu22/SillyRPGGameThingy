@@ -5,6 +5,7 @@ from States import States
 from Actions.Wander import Wander
 from Actions.Rest import Rest
 from Actions.Attack import Attack
+from Actions.Flee import Flee
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -23,13 +24,14 @@ class Brain():
 		self.character = character
 		self.actionsPerState: Dict[str, List[Action]] = {
 			States.Wander : [Wander(self.character), Rest(self.character)], # Wander action, Rest action
-			States.Combat : [Attack(self.character)] 	# Attack action, Flee action
+			States.Combat : [Attack(self.character), Flee(self.character)] 	# Attack action, Flee action
 		}
 
 	def think(self):
 		if not self.character.hasAction(): # if the character has no action,
 			# Set the characters current action to the best action (highest utility score) for the current state.
 			self.character.currentAction = max(self.actionsPerState[self.state], key=lambda i: i.getUtility)
+			self.character.currentAction.start()
 
 	def updateState():
 		# manages the FSM. Really just used to determine what situation the character is currently in.

@@ -33,3 +33,6 @@ class CharacterStats():
 	def getMaxHealth(self):
 		return 10 + (4 * self.stats["health"])
 
+	def getMaxStamina(self):
+			return 10 + (4 * self.stats["stamina"])
+
