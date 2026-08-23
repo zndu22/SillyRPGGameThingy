@@ -1,7 +1,7 @@
 from __future__ import annotations
 from constants import *
 
-from States import States
+from Brains.States import States
 from Actions.Wander import Wander
 from Actions.Rest import Rest
 from Actions.Attack import Attack
