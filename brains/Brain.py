@@ -22,15 +22,16 @@ class Brain():
 
 	def setup(self, character: Character):
 		self.character = character
-		self.actionsPerState: Dict[str, List[Action]] = {
-			States.Wander : [Wander(self.character), Rest(self.character)], # Wander action, Rest action
-			States.Combat : [Attack(self.character), Flee(self.character)] 	# Attack action, Flee action
+		self.actionsPerState: Dict[str, List[type[Action]]] = {
+			States.Wander : [Wander, Rest], # Wander action, Rest action
+			States.Combat : [Attack, Flee] 	# Attack action, Flee action
 		}
 
 	def think(self):
 		if not self.character.hasAction(): # if the character has no action,
 			# Set the characters current action to the best action (highest utility score) for the current state.
-			self.character.currentAction = max(self.actionsPerState[self.state], key=lambda i: i.getUtility())
+			actions = [actionType(self.character) for actionType in self.actionsPerState[self.state]]
+			self.character.currentAction = max(actions, key=lambda i: i.getUtility())
 			self.character.currentAction.start()
 
 	def updateState():
