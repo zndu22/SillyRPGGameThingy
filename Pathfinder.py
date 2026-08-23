@@ -78,9 +78,9 @@ class Pathfinder:
 			# Prevent corner cutting
 			if dx != 0 and dy != 0:
 				if (					
-					not self.tileWalkable(x+dx, y)
+					not self.tileWalkable((x+dx, y))
 					or
-					not self.tileWalkable(x, y+dy)
+					not self.tileWalkable((x, y+dy))
 				):
 					continue
 			if dx == 0 or dy == 0:
@@ -92,7 +92,7 @@ class Pathfinder:
 
 	def tileWalkable(self, pos):
 		x, y = pos
-		self.world.worldMap.getPixel(x, y) in self.walkableTiles
+		return self.world.worldMap.getPixel(x, y) in self.walkableTiles
 
 	def heuristic(self, a, b):
 		dx = abs(a[0] - b[0])
