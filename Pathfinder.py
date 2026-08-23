@@ -73,7 +73,7 @@ class Pathfinder:
 			nx = x + dx
 			ny = y + dy
 			# eventually check for impassible props here (buildings, walls, ect.) vvv
-			if not self.tileWalkable(nx, ny):
+			if not self.tileWalkable((nx, ny)):
 				continue
 			# Prevent corner cutting
 			if dx != 0 and dy != 0:

@@ -30,7 +30,7 @@ class Brain():
 	def think(self):
 		if not self.character.hasAction(): # if the character has no action,
 			# Set the characters current action to the best action (highest utility score) for the current state.
-			self.character.currentAction = max(self.actionsPerState[self.state], key=lambda i: i.getUtility)
+			self.character.currentAction = max(self.actionsPerState[self.state], key=lambda i: i.getUtility())
 			self.character.currentAction.start()
 
 	def updateState():

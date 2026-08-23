@@ -32,4 +32,4 @@ class Rest(Action):
         pass
 
     def getUtility(self):
-        return (-1 * math.sqrt(self.character.state["health"]/self.character.characterStats.getMaxHealth)) + 1
+        return (-1 * math.sqrt(self.character.state["health"]/self.character.characterStats.getMaxHealth())) + 1
