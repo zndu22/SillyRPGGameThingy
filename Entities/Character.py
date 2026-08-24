@@ -38,6 +38,8 @@ class Character(Entity):
 
 		self.pathfinder = Pathfinder(self.world, self.validTiles)
 		self.targetTile = position # I don't think this is actually used anywhere yet. Just useful to have I guess.
+		self.targetEntity: Character = None # I think This'll be used for everything from combat, to NPC interactions, ect.
+		# I'll have to think about that though.
 		
 	def Damage(self, health):
 		self.state["health"] -= health

@@ -1,13 +1,15 @@
+from __future__ import annotations
 from constants import *
 import random
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
 	from typing import List
+	from World import World
 
 class Entity():
 
-	def __init__(self, sprite, position, name, world):
+	def __init__(self, sprite, position, name, world: World):
 		self.positionX = position[0]
 		self.positionY = position[1]
 		self.name = name
@@ -18,7 +20,7 @@ class Entity():
 		
 		self.sprite = sprite
 
-		self.world = world
+		self.world: World = world
 
 	def __str__(self):
 		return f"{self.name} at position: {self.getPosition()}."

@@ -8,6 +8,10 @@ from CharacterStats import CharacterStats
 from Entities.Character import Character
 from Brains.Brain import Brain
 
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+	from typing import List
+
 #Handles the world and all the Entities in it.
 class World():
 
@@ -48,11 +52,17 @@ class World():
 	def getEntitiesAtPos(self, pos):
 		return self.entityPosMap[pos[0]][pos[1]]
 
-	def getEntitiesInRadius(self, pos, radius=1):
-		arr = []
+	def getEntitiesInRadius(self, pos, radius=1, tagMask: List[str]=[], inclusive=False):
+		arr: List[Entity] = []
 		for i in range(pos[0] - radius, pos[0] + radius + 1):
 			for j in range(pos[1] - radius, pos[1] + radius + 1):
 				for k in self.getEntitiesAtPos((i, j)): arr.append(k)
+		arr.sort(key=lambda x: distance(self.getPosition(), x.getPosition())) # I think this should sort entites by distance
+		# set(x).isdisjoint(y) returns true if x and y have no elements in common
+		if inclusive: # if the mask is inclusive, meaning it only returns entities with those tags,
+			arr = [i for i in arr if not set(i.tags).isdisjoint(tagMask)] # Then return all entities with any of those tags
+		else:
+			arr = [i for i in arr if set(i.tags).isdisjoint(tagMask)] # Otherwhise, return all the entities without those tags
 		return arr 
 
 	def UpdateArrays(self, entity):

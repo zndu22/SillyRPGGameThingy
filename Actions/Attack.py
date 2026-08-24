@@ -16,8 +16,10 @@ class Attack(Action):
         self.tickCounter = 0
         self.target: Character
 
-    def start(self, target: Character):
-        self.target = target
+    def start(self):
+        # It have to remove itself from the list so it doesn't try attacking itself
+        entitiesInRange = self.character.world.getEntitiesInRadius(self.character.getPosition(), 10).remove(self.character)
+        self.target = entitiesInRange[0] # Just select the closest one (I think)
     
     def update(self):
         if self.tickCounter >= self.ticksPerAttack: 
