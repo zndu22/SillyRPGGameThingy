@@ -18,7 +18,8 @@ class Attack(Action):
 
     def start(self):
         # It have to remove itself from the list so it doesn't try attacking itself
-        entitiesInRange = self.character.world.getEntitiesInRadius(self.character.getPosition(), 10).remove(self.character)
+        entitiesInRange = self.character.world.getEntitiesInRadius(self.character.getPosition(), 10, 
+            ["enemy"] if "friendly" in self.character.tags else ["friendly"], True).remove(self.character) # sorry
         self.target = entitiesInRange[0] # Just select the closest one (I think)
     
     def update(self):
