@@ -1,6 +1,8 @@
 from __future__ import annotations
 from constants import *
 
+from random import randint
+
 from Brains.States import States
 from Actions.Wander import Wander
 from Actions.Rest import Rest
@@ -26,6 +28,8 @@ class Brain():
 			States.Wander : [Wander, Rest], # Wander action, Rest action
 			States.Combat : [Attack, Flee] 	# Attack action, Flee action
 		}
+
+		self.character.tags.append("enemy" if randint(0,1) == 0 else "friendly")
 
 	def think(self):
 		if not self.character.hasAction(): # if the character has no action,
