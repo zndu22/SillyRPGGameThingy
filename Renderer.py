@@ -11,13 +11,16 @@ class Renderer():
 
 	def __init__(self, inputs: Input):
 		self.screen = pygame.display.set_mode((windowWidth, windowHeight), pygame.RESIZABLE)
+		self.debugScreen = pygame.Surface((windowWidth, windowHeight), pygame.SRCALPHA)
+		self.debugScreen.fill((0, 0, 0, 0))
+		self.framecount = 0 
 		self.icon = pygame.image.load("assets/icon.png")
 		pygame.display.set_icon(self.icon)
 		self.inputs = inputs
 
 		convertTextures()
 	
-	def RenderFrame(self, world: World, camera: Camera):
+	def RenderFrame(self, world: World, camera: Camera, clock: pygame.time.Clock):
 		self.screen.fill((0, 0, 0))
 		self.blit(world.worldMap.tilemap, camera.getPosition())
 
@@ -42,10 +45,17 @@ class Renderer():
 						# except: pygame.draw.line(self.screen, (255, 0, 0), self.toScreenSpace(world, camera, v), self.toScreenSpace(world, camera, i.getPosition()), 8)
 						except: pass
 
+		self.debugScreen.set_at((self.framecount%windowWidth, int(clock.get_fps()/10)), (255, 0, 0))
+		if self.framecount%windowWidth == 0: self.debugScreen.fill((0, 0, 0, 0))
+		self.screen.blit(self.debugScreen, (0, 0))
 		pygame.display.flip()
+		self.framecount += 1
 	
 	def blit(self, surface, position):
 		self.screen.blit(surface, position)
+
+	def plotPixel(self, pos, color):
+		self.screen.set_at(pos, color)
 
 	def toScreenSpace(self, world: World, camera:Camera, pos):
 		return tuple(v * (tileWidth, tileHeight)[i] + camera.getPosition()[i] for i, v in enumerate(pos))
